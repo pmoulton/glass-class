@@ -6,9 +6,9 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.radiusnetworks.ibeacon.Region;
 import com.radiusnetworks.proximity.ibeacon.startup.BootstrapNotifier;
 import com.radiusnetworks.proximity.ibeacon.startup.RegionBootstrap;
-import com.radiusnetworks.ibeacon.Region;
 
 import glass.such.classfeed.Util.AutoBahnConnection;
 import glass.such.classfeed.Util.Constants;
@@ -28,8 +28,8 @@ public class GCApplication extends Application implements BootstrapNotifier {
     public void onCreate() {
         super.onCreate();
         mContext = getApplicationContext();
-        Region region = new Region("com.radiusnetworks.androidproximityreference.backgroundRegion",beaconUUID, null, null);
-        regionBootstrap = new RegionBootstrap(this, region);
+//        Region region = new Region("com.radiusnetworks.androidproximityreference.backgroundRegion",beaconUUID, null, null);
+//        regionBootstrap = new RegionBootstrap(this, region);
 
         //Throw OnStart Testing Stuff Here
         if(Constants.Debug.ENABLED){
