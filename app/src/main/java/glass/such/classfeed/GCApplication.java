@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.radiusnetworks.proximity.ibeacon.startup.BootstrapNotifier;
 import com.radiusnetworks.proximity.ibeacon.startup.RegionBootstrap;
