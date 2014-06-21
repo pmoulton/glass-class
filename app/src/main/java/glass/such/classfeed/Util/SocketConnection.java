@@ -13,6 +13,7 @@ import com.koushikdutta.async.http.socketio.SocketIOClient;
 import com.koushikdutta.async.http.socketio.StringCallback;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Timer;
@@ -54,12 +55,18 @@ public class SocketConnection {
                 ex.printStackTrace();
                 return;
             }
-            client.emitEvent("WOW");
-            client.on("WOW", new EventCallback() {
+
+            try {
+                client.emit(new JSONObject("{\"mDoge\":\"HelloPeter\"}"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            client.on("message", new EventCallback() {
                 @Override
                 public void onEvent(JSONArray json, Acknowledge acknowledge) {
                     Log.d(TAG, "json: " + json.toString());
-                   // handlePayload(json);
+                    // handlePayload(json);
                 }
             });
             client.setStringCallback(new StringCallback() {
