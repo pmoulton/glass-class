@@ -31,5 +31,11 @@
                 android:resource="@xml/voice_trigger" />
         </service>
 
+        <service android:name=".RemoteListFeedUpdater"
+            android:permission="android.permission.BIND_REMOTEVIEWS"
+            android:enabled="true"
+            android:exported="true">
+        </service>
+
     </application>
 </manifest>

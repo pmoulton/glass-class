@@ -1,7 +1,6 @@
 package glass.such.classfeed;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.util.Log;
@@ -29,8 +28,6 @@ public class MainActivity extends Activity implements IBeaconConsumer, RangeNoti
 
 //        iBeaconManager = IBeaconManager.getInstanceForApplication(this.getApplicationContext());
 //        iBeaconManager.bind(this);
-
-        startService(new Intent(this, LiveCardService.class));
     }
 
     @Override
