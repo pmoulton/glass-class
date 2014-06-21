@@ -29,6 +29,9 @@ public class QuizActivity extends Activity {
         try {
             QuizScrollAdapter quizScrollAdapter = new QuizScrollAdapter(new Quiz(new JSONObject(Constants.Test.QUIZPAYLOAD)));
             cardScrollView.setAdapter(quizScrollAdapter);
+            cardScrollView.activate();
+
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -52,6 +55,5 @@ public class QuizActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 }
