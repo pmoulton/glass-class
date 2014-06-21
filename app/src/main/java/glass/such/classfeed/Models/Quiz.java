@@ -1,5 +1,7 @@
 package glass.such.classfeed.Models;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,6 +26,7 @@ public class Quiz {
     }
 
     public Quiz (JSONObject jsonObject) throws JSONException{
+        Log.d("quiz", jsonObject.toString());
         JSONArray questionJSONArray = jsonObject.getJSONArray(QUESTIONS);
         this.questions  = new Question[questionJSONArray.length()];
         this.title      = jsonObject.getString(TITLE);
