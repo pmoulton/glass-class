@@ -7,5 +7,6 @@
     <string name="action_settings">Settings</string>
     <string name="glass_voice_trigger">Start Class</string>
     <string name="empty_string">No content available</string>
+    <string name="title_activity_quiz">Quiz</string>
 
 </resources>
