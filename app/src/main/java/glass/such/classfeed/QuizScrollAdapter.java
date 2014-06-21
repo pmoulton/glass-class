@@ -5,13 +5,18 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import glass.such.classfeed.Data.QuizActivity;
 import glass.such.classfeed.Models.Question;
@@ -60,14 +65,21 @@ public class QuizScrollAdapter extends com.google.android.glass.widget.CardScrol
             viewHolder.imageView    = (ImageView) convertView.findViewById(R.id.quiz_image);
             viewHolder.possibleListView = (ListView) convertView.findViewById(R.id.quiz_list);
             convertView.setTag(viewHolder);
+
+            String[] data = new String[5];
+            data[0] = quizCards.get(i).getTitle();
+            data[1] = quizCards.get(i).getUuid();
+            data[2] = quizCards.get(i).getAnswers().get(0).getAnswer();
+            data[3] = quizCards.get(i).getAnswers().get(1).getAnswer();
+            data[4] = quizCards.get(i).getAnswers().get(2).getAnswer();
+            viewHolder.possibleListView.setAdapter(new ArrayAdapter<String>(GCApplication.getContext(), R.layout.list_item, data));
+
         }
-        else
-            viewHolder = (ViewHolder) convertView.getTag();
+        else {}
+        viewHolder = (ViewHolder) convertView.getTag();
         QuizCard quizCard = getItem(i);
         viewHolder.titleTextView.setText(quizCard.getTitle());
         viewHolder.answers = quizCard.getAnswers();
-        //viewHolder.possibleListView.setAdapter(new SimpleAdapter(GCApplication.getContext(), ));
-
         return convertView;
     }
 
@@ -75,6 +87,7 @@ public class QuizScrollAdapter extends com.google.android.glass.widget.CardScrol
     public int getPosition(Object o) {
         return 0;
     }
+
 
     static class ViewHolder{
         public ImageView imageView;
