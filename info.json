@@ -1,0 +1,62 @@
+var notes1 = {
+    "type": "Notes",
+    "data": {
+        "text": "Learning about exothermic reactions.",
+        "urls": [
+            "http://en.wikipedia.org/wiki/Exothermic_reaction",
+            "http://chemistry.about.com/cs/generalchemistry/a/aa051903a.htm"
+        ],
+        "images": [
+            {
+                "title": "exothermic-graph",
+                "url": "http://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Ac_com.svg/487px-Ac_com.svg.png"
+            },
+            {
+                "title": "exothermic-reaction",
+                "url": "http://people.bu.edu/straub/courses/demomaster/images/thermite1.jpg"
+            }
+        ]
+    }
+}
+
+var notes2 = {
+    "type": "Notes",
+    "data": {
+        "text": "Python is a widely used general-purpose, high-level programming language.",
+        "urls": [
+            "https://www.python.org/",
+            "http://en.wikipedia.org/wiki/Python_(programming_language)"
+        ],
+        "images": [
+            {
+                "title": "actuly-python",
+                "url": "http://i.telegraph.co.uk/multimedia/archive/01672/burmesePython_1672763c.jpg"
+            },
+        ]
+    }
+}
+
+var quiz = {
+    "type": "Quiz",
+    "data": {
+        "uuid": "SomeUUIDHere",
+        "text": "Pop Quiz Question of the day",
+        "questions": [
+            {
+                "question": "What is the air-speed velocity of an unladen swallow?",
+                "possible": [
+                    {
+                        “text”:"42 miles per hour."
+                    },
+                    {
+                        “text”:"Because of the Ocean."
+                    },
+                    {
+                        “text”:"What do you mean? An African or European swallow?"
+                    }
+                ],
+                "answer": 1
+            }
+        ]
+    }
+}
