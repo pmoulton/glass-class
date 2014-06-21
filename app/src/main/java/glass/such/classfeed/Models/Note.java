@@ -9,7 +9,7 @@ import org.json.JSONObject;
  */
 public class Note {
     public static final String IMAGES       = "images";
-    public static final String NOTE        = "note";
+    public static final String NOTE         = "Notes";
     public static final String TEXT         = "text";
     public static final String URLS         = "urls";
 
