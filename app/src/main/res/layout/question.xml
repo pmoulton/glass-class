@@ -21,7 +21,7 @@
         ></LinearLayout>
 
     <LinearLayout
-        android:id="@+id/questionTopicr"
+        android:id="@+id/questionTopic"
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
         >
 
     <LinearLayout
-        android:id="@+id/footer_container"
+        android:id="@+id/questionAnswers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|left"
