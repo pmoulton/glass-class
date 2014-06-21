@@ -3,17 +3,15 @@ package glass.such.classfeed.Data;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.SoundPool;
-import android.os.Handler;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.android.glass.media.Sounds;
-import com.google.android.glass.timeline.LiveCard;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,6 +20,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import glass.such.classfeed.Models.Image;
+import glass.such.classfeed.Models.Note;
 import glass.such.classfeed.R;
 
 /**
@@ -36,10 +35,10 @@ public class FeedView extends FrameLayout {
     private static TextView h2;
     private static TextView h3;
     private static TextView h4;
-    private static TextView d1;
-    private static TextView d2;
-    private static TextView d3;
-    private static TextView d4;
+    private static ImageView img1;
+    private static ImageView img2;
+    private static ImageView img3;
+    private static ImageView img4;
 
 
     /**
@@ -84,12 +83,10 @@ public class FeedView extends FrameLayout {
         h2 = (TextView) item2.findViewById(R.id.item_heading_text);
         h3 = (TextView) item3.findViewById(R.id.item_heading_text);
         h4 = (TextView) item4.findViewById(R.id.item_heading_text);
-        d1 = (TextView) item1.findViewById(R.id.item_desc_text);
-        d2 = (TextView) item2.findViewById(R.id.item_desc_text);
-        d3 = (TextView) item3.findViewById(R.id.item_desc_text);
-        d4 = (TextView) item4.findViewById(R.id.item_desc_text);
-
-
+        img1 = (ImageView) item1.findViewById(R.id.item_image);
+        img2 = (ImageView) item2.findViewById(R.id.item_image);
+        img3 = (ImageView) item3.findViewById(R.id.item_image);
+        img4 = (ImageView) item4.findViewById(R.id.item_image);
 
 //        mFeedListAdapter = new FeedListAdapter(getContext());
 
@@ -98,42 +95,38 @@ public class FeedView extends FrameLayout {
 //        mListView.setAdapter(swingRightInAnimationAdapter);
 //        mListView.setAdapter(mFeedListAdapter);
 
-        AddItem addItem = new AddItem();
-        Timer itemTimer = new Timer();
-        itemTimer.schedule(addItem, 4000, 4000);
+//        AddItem addItem = new AddItem();
+//        Timer itemTimer = new Timer();
+//        itemTimer.schedule(addItem, 4000, 4000);
 
     }
 
-    class AddItem extends TimerTask {
-        public void run() {
-            try {
-                JSONObject json = new JSONObject();
-                json.put(Image.DESC, count+ " Placeholder description text");
-                json.put(Image.TITLE, count+ " Placeholder title text");
-                json.put(Image.URL, "url");
-                Image newImage = new Image(json);
-                count++;
-                addImage(newImage);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+//    class AddItem extends TimerTask {
+//        public void run() {
+//            try {
+//                JSONObject json = new JSONObject();
+//                json.put(Image.DESC, count+ " Placeholder description text");
+//                json.put(Image.TITLE, count+ " Placeholder title text");
+//                json.put(Image.URL, "url");
+//                Image newImage = new Image(json);
+//                count++;
+//                addImage(newImage);
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//
+//        }
+//    }
 
-        }
-    }
-
-    private void addImage(Image img) {
+    private void addNote(Note note) {
         h4.setText(h3.getText());
-        d4.setText(d3.getText());
+        img4 = img3;
         h3.setText(h2.getText());
-        d3.setText(d2.getText());
+        img3 = img2;
         h2.setText(h1.getText());
-        d2.setText(d1.getText());
-        h1.setText(img.getTitle());
-        d1.setText(img.getDescription());
-
-//        AudioManager mAudioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
-//        mAudioManager.playSoundEffect(Sounds.TAP);
-//        mAudioManager.playSoundEffect(Sounds.SUCCESS);
+        img2 = img1;
+        h1.setText(note.getText());
+        Picasso.with(getContext()).load("http://i.imgur.com/DvpvklR.png").into(img1);
 
         final SoundPool mSoundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
         final int mAlertReceived = mSoundPool.load(getContext(), R.raw.countdown_bip, 1);
