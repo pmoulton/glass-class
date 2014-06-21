@@ -27,8 +27,9 @@ public class QuizActivity extends Activity {
 
         cardScrollView = (CardScrollView) findViewById(R.id.quizscroller);
         try {
-            QuizScrollAdapter quizScrollAdapter = new QuizScrollAdapter(new Quiz(new JSONObject(Constants.Test.QUIZPAYLOAD)));
+            QuizScrollAdapter quizScrollAdapter = new QuizScrollAdapter(new Quiz(new JSONObject(Constants.Test.QUIZPAYLOAD).getJSONObject("data")));
             cardScrollView.setAdapter(quizScrollAdapter);
+            quizScrollAdapter.notifyDataSetChanged();
         } catch (JSONException e) {
             e.printStackTrace();
         }
