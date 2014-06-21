@@ -13,6 +13,7 @@ import com.google.android.glass.timeline.LiveCard;
 import com.google.android.glass.timeline.LiveCard.PublishMode;
 
 import glass.such.classfeed.MenuActivity;
+import glass.such.classfeed.Models.Quiz;
 
 public class FeedService extends Service {
 
@@ -43,7 +44,7 @@ public class FeedService extends Service {
 
             mLiveCard.setDirectRenderingEnabled(true).getSurfaceHolder().addCallback(mTimerDrawer);
 
-            Intent menuIntent = new Intent(this, MenuActivity.class);
+            Intent menuIntent = new Intent(this, QuizActivity.class);
             menuIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             mLiveCard.setAction(PendingIntent.getActivity(this, 0, menuIntent, 0));
             mLiveCard.attach(this);
