@@ -4,6 +4,8 @@ package glass.such.classfeed.Util;
  * Created by vincente on 6/20/14.
  */
 public class Constants {
+    public static final String WSURI = "http://qcast.ptzlabs.com:3000";
+
     public class JSON{
         public static final String TYPE = "type";
         public static final String DATA = "data";
