@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="glass.such.classfeed">
-    <uses-permission android:name="android.permission.internet"/>
+    package="glass.such.classfeed" >
+
+    <uses-permission android:name="android.permission.internet" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="com.google.android.glass.permission.DEVELOPMENT" />
@@ -11,27 +12,33 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
-
         <activity
             android:name=".MenuActivity"
+            android:enabled="true"
             android:label="@string/app_name"
-            android:theme="@style/MenuTheme"
-            android:enabled="true" >
+            android:theme="@style/MenuTheme" >
         </activity>
 
         <service
             android:name=".Data.FeedService"
-            android:icon="@android:drawable/ic_menu_edit"
-            android:label="@string/app_name"
             android:enabled="true"
-            android:exported="true">
+            android:exported="true"
+            android:icon="@android:drawable/ic_menu_edit"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="com.google.android.glass.action.VOICE_TRIGGER" />
             </intent-filter>
+
             <meta-data
                 android:name="com.google.android.glass.VoiceTrigger"
                 android:resource="@xml/voice_trigger" />
         </service>
 
+        <activity
+            android:name=".Data.QuizActivity"
+            android:label="@string/title_activity_quiz"
+            android:immersive="true">
+        </activity>
     </application>
+
 </manifest>
