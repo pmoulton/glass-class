@@ -33,9 +33,9 @@ public class QuizScrollAdapter extends com.google.android.glass.widget.CardScrol
     Question[] questions;
     ArrayList<QuizCard> quizCards;
 
-    public QuizScrollAdapter(Quiz quiz){
+    public QuizScrollAdapter(Quiz quiz, Context context){
         quizCards = new ArrayList<QuizCard>();
-        this.context    = GCApplication.getContext();
+        this.context    = context;
         this.questions  = quiz.getQuestions();
         this.quiz       = quiz;
 
@@ -71,19 +71,17 @@ public class QuizScrollAdapter extends com.google.android.glass.widget.CardScrol
             viewHolder.possibleListView = (ListView) convertView.findViewById(R.id.quiz_list);
             convertView.setTag(viewHolder);
 
-            String[] data = new String[4];
-            data[0] = quizCards.get(i).getTitle();
-            data[1] = quizCards.get(i).getAnswers().get(0).getAnswer();
-            data[2] = quizCards.get(i).getAnswers().get(1).getAnswer();
-            data[3] = quizCards.get(i).getAnswers().get(2).getAnswer();
-            viewHolder.possibleListView.setAdapter(new ArrayAdapter<String>(GCApplication.getContext(), R.layout.quiz_card, data));
+            List<String> data = new ArrayList<String>();
+            data.add(quizCards.get(i).getTitle());
+            data.addAll(quizCards.get(i).getAnswers());
+            viewHolder.possibleListView.setAdapter(new ArrayAdapter<String>(context, R.layout.quiz_card, data));
 
         }
         else {}
         viewHolder = (ViewHolder) convertView.getTag();
         QuizCard quizCard = getItem(i);
         viewHolder.titleTextView.setText(quizCard.getTitle());
-        viewHolder.answers = quizCard.getAnswers();
+        viewHolder.answers = quizCard.getAnswersAsAnswers();
         return convertView;
     }
 
