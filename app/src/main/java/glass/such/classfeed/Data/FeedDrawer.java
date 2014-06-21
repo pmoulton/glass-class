@@ -8,8 +8,10 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.google.android.glass.timeline.DirectRenderingCallback;
+import com.squareup.picasso.Picasso;
 
 import glass.such.classfeed.R;
 
@@ -18,6 +20,7 @@ public class FeedDrawer implements DirectRenderingCallback {
     private SurfaceHolder mHolder;
     private boolean mRenderingPaused;
     private RenderThread mRenderThread;
+    private Context mContext;
     private static final long FRAME_TIME_MILLIS = 1000;
 
     private final FeedView mView;
@@ -32,6 +35,7 @@ public class FeedDrawer implements DirectRenderingCallback {
 
     public FeedDrawer(Context context) {
         mView = new FeedView(context);
+        mContext = context;
         mView.setListener(mListener);
     }
 

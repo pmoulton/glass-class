@@ -8,7 +8,7 @@ import org.json.JSONObject;
  */
 public class Image {
     public static final String TITLE= "title";
-    public static final String DESC= "description";
+    //public static final String DESC= "description";
     public static final String URL  = "url";
 
     private String url  = null;
@@ -18,7 +18,7 @@ public class Image {
     public Image(JSONObject jsonObject) throws JSONException {
         url     = jsonObject.getString(URL);
         title   = jsonObject.getString(TITLE);
-        description = jsonObject.getString(DESC);
+        //description = jsonObject.getString(DESC);
     }
 
     public String getUrl() {
@@ -29,5 +29,5 @@ public class Image {
         return title;
     }
 
-    public String getDescription() { return description; }
+//    public String getDescription() { return description; }
 }
