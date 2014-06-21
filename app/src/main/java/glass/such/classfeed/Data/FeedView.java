@@ -19,8 +19,10 @@ import org.json.JSONObject;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import glass.such.classfeed.GCApplication;
 import glass.such.classfeed.Models.Image;
 import glass.such.classfeed.Models.Note;
+import glass.such.classfeed.Models.Quiz;
 import glass.such.classfeed.R;
 
 /**
@@ -98,7 +100,19 @@ public class FeedView extends FrameLayout {
 //        AddItem addItem = new AddItem();
 //        Timer itemTimer = new Timer();
 //        itemTimer.schedule(addItem, 4000, 4000);
+        GCApplication.OnItemReceived onItemReceived = new GCApplication.OnItemReceived() {
+            @Override
+            public void onQuizReceived(Quiz receivedQuiz) throws Exception {
 
+            }
+
+            @Override
+            public void onNotesReceived(Note receivedNote) throws Exception {
+                addNote(receivedNote);
+            }
+        };
+        GCApplication.setOnItemReceived(onItemReceived);
+        GCApplication.startAutoPuller();
     }
 
 //    class AddItem extends TimerTask {
