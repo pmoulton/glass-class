@@ -17,6 +17,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutionException;
 
+import glass.such.classfeed.Data.FeedService;
 import glass.such.classfeed.Models.Note;
 import glass.such.classfeed.Models.Quiz;
 import glass.such.classfeed.Util.AutoBahnConnection;
@@ -78,6 +79,7 @@ public class GCApplication extends Application implements BootstrapNotifier {
     }
 
     public static void stopAutoPuller(){
+        FeedService.getLiveCard().unpublish();
         running = false;
     }
 
