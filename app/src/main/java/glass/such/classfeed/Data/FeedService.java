@@ -2,10 +2,13 @@ package glass.such.classfeed.Data;
 
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Binder;
 import android.os.IBinder;
 
+import com.google.android.glass.media.Sounds;
 import com.google.android.glass.timeline.LiveCard;
 import com.google.android.glass.timeline.LiveCard.PublishMode;
 
@@ -21,7 +24,11 @@ public class FeedService extends Service {
 
     private FeedDrawer mTimerDrawer;
 
-    private LiveCard mLiveCard;
+    private static LiveCard mLiveCard;
+
+    public static LiveCard getLiveCard() {
+        return mLiveCard;
+    }
 
     @Override
     public void onCreate() {
@@ -41,6 +48,7 @@ public class FeedService extends Service {
             mLiveCard.setAction(PendingIntent.getActivity(this, 0, menuIntent, 0));
             mLiveCard.attach(this);
             mLiveCard.publish(PublishMode.REVEAL);
+
         } else {
             mLiveCard.navigate();
         }
