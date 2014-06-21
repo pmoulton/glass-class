@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:background="@android:color/black" >
 
+
     <!-- ListView to be shown on widget -->
     <ListView
         android:id="@+id/listViewWidget"
