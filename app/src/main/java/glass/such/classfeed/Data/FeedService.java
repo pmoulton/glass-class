@@ -2,14 +2,18 @@ package glass.such.classfeed.Data;
 
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Binder;
 import android.os.IBinder;
 
+import com.google.android.glass.media.Sounds;
 import com.google.android.glass.timeline.LiveCard;
 import com.google.android.glass.timeline.LiveCard.PublishMode;
 
 import glass.such.classfeed.MenuActivity;
+import glass.such.classfeed.Models.Quiz;
 
 public class FeedService extends Service {
 
@@ -21,7 +25,11 @@ public class FeedService extends Service {
 
     private FeedDrawer mTimerDrawer;
 
-    private LiveCard mLiveCard;
+    private static LiveCard mLiveCard;
+
+    public static LiveCard getLiveCard() {
+        return mLiveCard;
+    }
 
     @Override
     public void onCreate() {
@@ -36,11 +44,12 @@ public class FeedService extends Service {
 
             mLiveCard.setDirectRenderingEnabled(true).getSurfaceHolder().addCallback(mTimerDrawer);
 
-            Intent menuIntent = new Intent(this, MenuActivity.class);
+            Intent menuIntent = new Intent(this, QuizActivity.class);
             menuIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             mLiveCard.setAction(PendingIntent.getActivity(this, 0, menuIntent, 0));
             mLiveCard.attach(this);
             mLiveCard.publish(PublishMode.REVEAL);
+
         } else {
             mLiveCard.navigate();
         }

@@ -1,23 +1,33 @@
 package glass.such.classfeed.Data;
 
 import android.content.Context;
-import android.os.Handler;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import glass.such.classfeed.Models.Image;
+import glass.such.classfeed.Models.Note;
 import glass.such.classfeed.R;
+import glass.such.classfeed.Util.Constants;
 
 /**
  * View used to draw a running timer.
@@ -31,10 +41,10 @@ public class FeedView extends FrameLayout {
     private static TextView h2;
     private static TextView h3;
     private static TextView h4;
-    private static TextView d1;
-    private static TextView d2;
-    private static TextView d3;
-    private static TextView d4;
+    private static ImageView img1;
+    private static ImageView img2;
+    private static ImageView img3;
+    private static ImageView img4;
 
 
     /**
@@ -50,7 +60,7 @@ public class FeedView extends FrameLayout {
     }
 
     private ListView mListView;
-    private FeedListAdapter mFeedListAdapter;
+//    private FeedListAdapter mFeedListAdapter;
 
 
     public FeedView(Context context) {
@@ -79,12 +89,10 @@ public class FeedView extends FrameLayout {
         h2 = (TextView) item2.findViewById(R.id.item_heading_text);
         h3 = (TextView) item3.findViewById(R.id.item_heading_text);
         h4 = (TextView) item4.findViewById(R.id.item_heading_text);
-        d1 = (TextView) item1.findViewById(R.id.item_desc_text);
-        d2 = (TextView) item2.findViewById(R.id.item_desc_text);
-        d3 = (TextView) item3.findViewById(R.id.item_desc_text);
-        d4 = (TextView) item4.findViewById(R.id.item_desc_text);
-
-
+        img1 = (ImageView) item1.findViewById(R.id.item_image);
+        img2 = (ImageView) item2.findViewById(R.id.item_image);
+        img3 = (ImageView) item3.findViewById(R.id.item_image);
+        img4 = (ImageView) item4.findViewById(R.id.item_image);
 
 //        mFeedListAdapter = new FeedListAdapter(getContext());
 
@@ -95,53 +103,45 @@ public class FeedView extends FrameLayout {
 
         AddItem addItem = new AddItem();
         Timer itemTimer = new Timer();
-        itemTimer.schedule(addItem, 1000, 1000);
+        itemTimer.schedule(addItem, 4000, 4000);
 
     }
 
     class AddItem extends TimerTask {
         public void run() {
             try {
-                JSONObject json = new JSONObject();
-                json.put(Image.DESC, count+ " Placeholder description text");
-                json.put(Image.TITLE, "Placeholder title text");
-                json.put(Image.URL, "url");
-                Image newImage = new Image(json);
-//                mListView.invalidateViews();
-//                mFeedListAdapter.add(newImage);
-//                Log.d("", String.valueOf(mFeedListAdapter.getCount()));
-//                mListView.smoothScrollToPosition(0);
-                mChangeListener.onChange();
+                Note newNote = new Note(new JSONObject(Constants.Test.NOTEPAYLOAD).getJSONObject("data"));
                 count++;
-                Log.d(TAG, count + "" + count %4);
-
-                switch (count %4) {
-                    case 0:
-                        Log.d(TAG, "1");
-                        d1.setText(count + " Placeholder text");
-                        h1.setText(count + " Placeholder desc");
-                        break;
-                    case 1:
-                        Log.d(TAG, "2");
-                        d2.setText(count + " Placeholder text");
-                        h2.setText(count + " Placeholder desc");
-                        break;
-                    case 2:
-                        Log.d(TAG, "3");
-                        d3.setText(count + " Placeholder text");
-                        h3.setText(count + " Placeholder desc");
-                        break;
-                    case 3:
-                        Log.d(TAG, "4");
-                        d4.setText(count + " Placeholder text");
-                        h4.setText(count + " Placeholder desc");
-                        break;
-                }
-            } catch (JSONException e) {
+                addNote(newNote);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
+    }
+
+    private void addNote(Note note) throws IOException {
+        h4.setText(h3.getText());
+        img4.setImageDrawable(img3.getDrawable());
+        h3.setText(h2.getText());
+        img3.setImageDrawable(img2.getDrawable());
+        h2.setText(h1.getText());
+        img2.setImageDrawable(img1.getDrawable());
+        h1.setText(note.getText());
+
+        Bitmap bmp = Picasso.with(getContext()).load("http://i.imgur.com/DvpvklR.png").get();
+        img1.setImageBitmap(bmp);
+
+        final SoundPool mSoundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
+        final int mAlertReceived = mSoundPool.load(getContext(), R.raw.countdown_bip, 1);
+
+        mSoundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+            @Override
+            public void onLoadComplete(SoundPool soundPool, int i, int i2) {
+                mSoundPool.play(mAlertReceived, 1, 1, 1, 0, 1);
+//                FeedService.getLiveCard().navigate();
+            }
+        });
+
     }
 
 }
