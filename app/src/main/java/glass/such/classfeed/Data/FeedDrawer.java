@@ -68,7 +68,7 @@ public class FeedDrawer implements DirectRenderingCallback {
         updateRendering();
     }
 
-    private synchronized void updateRendering() {
+    private void updateRendering() {
         boolean shouldRender = (mHolder != null) && !mRenderingPaused;
         boolean rendering = mRenderThread != null;
 
