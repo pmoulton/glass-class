@@ -1,0 +1,3 @@
+<objectAnimator xmlns:android="http://schemas.android.com/apk/res/android"
+    android:valueTo="0"
+    android:propertyName="alpha"/>

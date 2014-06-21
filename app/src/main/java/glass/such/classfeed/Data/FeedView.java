@@ -1,6 +1,8 @@
 package glass.such.classfeed.Data;
 
 import android.content.Context;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -9,6 +11,9 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.google.android.glass.media.Sounds;
+import com.google.android.glass.timeline.LiveCard;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -95,7 +100,7 @@ public class FeedView extends FrameLayout {
 
         AddItem addItem = new AddItem();
         Timer itemTimer = new Timer();
-        itemTimer.schedule(addItem, 1000, 1000);
+        itemTimer.schedule(addItem, 4000, 4000);
 
     }
 
@@ -125,6 +130,22 @@ public class FeedView extends FrameLayout {
         d2.setText(d1.getText());
         h1.setText(img.getTitle());
         d1.setText(img.getDescription());
+
+//        AudioManager mAudioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
+//        mAudioManager.playSoundEffect(Sounds.TAP);
+//        mAudioManager.playSoundEffect(Sounds.SUCCESS);
+
+        final SoundPool mSoundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
+        final int mAlertReceived = mSoundPool.load(getContext(), R.raw.countdown_bip, 1);
+
+        mSoundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+            @Override
+            public void onLoadComplete(SoundPool soundPool, int i, int i2) {
+                mSoundPool.play(mAlertReceived, 1, 1, 1, 2, 1);
+//                FeedService.getLiveCard().navigate();
+            }
+        });
+
     }
 
 }

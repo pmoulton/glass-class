@@ -1,13 +1,17 @@
 package glass.such.classfeed.Data;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.os.Looper;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.View;
 
 import com.google.android.glass.timeline.DirectRenderingCallback;
+
+import glass.such.classfeed.R;
 
 public class FeedDrawer implements DirectRenderingCallback {
 
@@ -128,6 +132,11 @@ public class FeedDrawer implements DirectRenderingCallback {
 
         @Override
         public void run() {
+//            Looper.prepare();
+//            Looper.loop();
+//            View item1 = mView.findViewById(R.id.cell1);
+//            ObjectAnimator alphaAnimation = ObjectAnimator.ofFloat(item1, View.ALPHA, 0, 1);
+//            alphaAnimation.start();
             while (shouldRun()) {
                 draw();
                 SystemClock.sleep(FRAME_TIME_MILLIS);
