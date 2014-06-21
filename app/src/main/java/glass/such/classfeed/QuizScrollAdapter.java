@@ -2,6 +2,7 @@ package glass.such.classfeed;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,7 @@ public class QuizScrollAdapter extends com.google.android.glass.widget.CardScrol
     ArrayList<QuizCard> quizCards;
 
     public QuizScrollAdapter(Quiz quiz){
+        quizCards = new ArrayList<QuizCard>();
         this.context    = GCApplication.getContext();
         this.questions  = quiz.getQuestions();
         this.quiz       = quiz;
@@ -41,6 +43,8 @@ public class QuizScrollAdapter extends com.google.android.glass.widget.CardScrol
         for(int i=0; i<questions.length; i++){
             quizCards.add(new QuizCard(questions[i]));
         }
+        Log.d("quizadapter", String.valueOf(quizCards.size()));
+        notifyDataSetChanged();
     }
 
     @Override
@@ -55,6 +59,7 @@ public class QuizScrollAdapter extends com.google.android.glass.widget.CardScrol
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
+        Log.d("quizadapter", "getview");
         View convertView = view;
         ViewHolder viewHolder;
         if(convertView == null){
