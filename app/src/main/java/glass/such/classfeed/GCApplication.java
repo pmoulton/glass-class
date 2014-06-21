@@ -9,6 +9,9 @@ import com.radiusnetworks.proximity.ibeacon.startup.BootstrapNotifier;
 import com.radiusnetworks.proximity.ibeacon.startup.RegionBootstrap;
 import com.radiusnetworks.ibeacon.Region;
 
+import glass.such.classfeed.Util.AutoBahnConnection;
+import glass.such.classfeed.Util.Constants;
+
 /**
  * Created by vincente on 6/20/14.
  */

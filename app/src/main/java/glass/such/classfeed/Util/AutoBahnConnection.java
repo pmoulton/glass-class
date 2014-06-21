@@ -1,4 +1,4 @@
-package glass.such.classfeed;
+package glass.such.classfeed.Util;
 
 import android.util.Log;
 
@@ -14,7 +14,6 @@ public class AutoBahnConnection {
     private final WebSocketConnection mConnection = new WebSocketConnection();
 
     public AutoBahnConnection(){
-
     }
 
     public void startConnection(String wsuri){
@@ -28,8 +27,7 @@ public class AutoBahnConnection {
     WebSocketHandler socketHandler = new WebSocketHandler() {
         @Override
         public void onOpen() {
-            Log.d(TAG, "Status: Connected!");
-            mConnection.sendTextMessage("Hello, world!");
+            Log.d(TAG, "Status: Connected to " + Constants.Debug.WSURI);
         }
 
         @Override
