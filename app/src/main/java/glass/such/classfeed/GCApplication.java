@@ -81,6 +81,8 @@ public class GCApplication extends Application implements BootstrapNotifier {
         running = false;
     }
 
+
+
     @Override
     public void didEnterRegion(Region arg0) {
         Log.d(TAG, "did enter region.");
@@ -101,13 +103,23 @@ public class GCApplication extends Application implements BootstrapNotifier {
         return mContext;
     }
 
+    private static JSONObject previousJSON = null;
+
     protected static void handlePayload(JSONObject object){
+
+        if(previousJSON == null){
+            previousJSON = object;
+        }
+        else if(!TextUtils.equals(previousJSON.toString(), object.toString()))
+            previousJSON = object;
+        else
+            return;
         try {
             if(object != null ){
                 if(object.length() == 0)
                     return;
                 else if(object.has("status") && TextUtils.equals(object.getString("status"), "fail")) {
-                    //GCApplication.stopAutoPuller();
+                    GCApplication.stopAutoPuller();
                     Log.d(TAG, "Stopping Auto Puller as Slides are not in session");
                     return;
                 }

@@ -13,7 +13,7 @@ public class Note {
     public static final String TEXT         = "text";
     public static final String URLS         = "urls";
 
-    private Image[] images  = null;
+    private Image[] images      = null;
     private String[] urls       = null;
     private String text         = null;
 
