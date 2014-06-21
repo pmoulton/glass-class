@@ -15,7 +15,7 @@ public class MoreImage{
     private String title= null;
     private String text = null;
 
-    public Image(JSONObject jsonObject) throws JSONException {
+    public MoreImage(JSONObject jsonObject) throws JSONException {
         url     = jsonObject.getString(URL);
         title   = jsonObject.getString(TITLE);
         text = jsonObject.getString(TEXT);

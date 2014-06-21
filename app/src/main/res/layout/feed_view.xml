@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/black" >
-    <ListView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/feed"></ListView>
-</FrameLayout>
+    <!--<ListView-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="fill_parent"-->
+        <!--android:id="@+id/feed"></ListView>-->
+    <include android:id="@+id/cell1" layout="@layout/feed_list_item" />
+    <include android:id="@+id/cell2" layout="@layout/feed_list_item" />
+    <include android:id="@+id/cell3" layout="@layout/feed_list_item" />
+    <include android:id="@+id/cell4" layout="@layout/feed_list_item" />
+
+</LinearLayout>
