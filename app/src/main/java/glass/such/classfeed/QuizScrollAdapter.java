@@ -71,12 +71,11 @@ public class QuizScrollAdapter extends com.google.android.glass.widget.CardScrol
             viewHolder.possibleListView = (ListView) convertView.findViewById(R.id.quiz_list);
             convertView.setTag(viewHolder);
 
-            String[] data = new String[5];
+            String[] data = new String[4];
             data[0] = quizCards.get(i).getTitle();
-            data[1] = quizCards.get(i).getUuid();
-            data[2] = quizCards.get(i).getAnswers().get(0).getAnswer();
-            data[3] = quizCards.get(i).getAnswers().get(1).getAnswer();
-            data[4] = quizCards.get(i).getAnswers().get(2).getAnswer();
+            data[1] = quizCards.get(i).getAnswers().get(0).getAnswer();
+            data[2] = quizCards.get(i).getAnswers().get(1).getAnswer();
+            data[3] = quizCards.get(i).getAnswers().get(2).getAnswer();
             viewHolder.possibleListView.setAdapter(new ArrayAdapter<String>(GCApplication.getContext(), R.layout.list_item, data));
 
         }
