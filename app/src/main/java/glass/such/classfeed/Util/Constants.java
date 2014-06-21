@@ -4,7 +4,8 @@ package glass.such.classfeed.Util;
  * Created by vincente on 6/20/14.
  */
 public class Constants {
-    public static final String WSURI = "http://qcast.ptzlabs.com:3000";
+    public static final String WSURI = "http://qcast.ptzlabs.com:1337/getNote";
+    public static final long REFRESH_TIME = 5000;
 
     public class JSON{
         public static final String TYPE = "type";
@@ -14,6 +15,7 @@ public class Constants {
     public class Debug{
         public static final boolean ENABLED = true;
         public static final String WSURI    = "ws://192.168.43.129:8080/";
+        public static final String BEACON_ID= "3309";
     }
 
     public class Test{

@@ -1,8 +1,6 @@
 package glass.such.classfeed.Data;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.util.AttributeSet;
@@ -14,20 +12,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import glass.such.classfeed.Models.Image;
 import glass.such.classfeed.Models.Note;
 import glass.such.classfeed.R;
-import glass.such.classfeed.Util.Constants;
 
 /**
  * View used to draw a running timer.
@@ -60,7 +54,7 @@ public class FeedView extends FrameLayout {
     }
 
     private ListView mListView;
-//    private FeedListAdapter mFeedListAdapter;
+   // private FeedListAdapter mFeedListAdapter;
 
 
     public FeedView(Context context) {
@@ -101,35 +95,38 @@ public class FeedView extends FrameLayout {
 //        mListView.setAdapter(swingRightInAnimationAdapter);
 //        mListView.setAdapter(mFeedListAdapter);
 
-        AddItem addItem = new AddItem();
-        Timer itemTimer = new Timer();
-        itemTimer.schedule(addItem, 4000, 4000);
+//        AddItem addItem = new AddItem();
+//        Timer itemTimer = new Timer();
+//        itemTimer.schedule(addItem, 4000, 4000);
 
     }
 
-    class AddItem extends TimerTask {
-        public void run() {
-            try {
-                Note newNote = new Note(new JSONObject(Constants.Test.NOTEPAYLOAD).getJSONObject("data"));
-                count++;
-                addNote(newNote);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
+//    class AddItem extends TimerTask {
+//        public void run() {
+//            try {
+//                JSONObject json = new JSONObject();
+//                json.put(Image.DESC, count+ " Placeholder description text");
+//                json.put(Image.TITLE, count+ " Placeholder title text");
+//                json.put(Image.URL, "url");
+//                Image newImage = new Image(json);
+//                count++;
+//                addImage(newImage);
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//
+//        }
+//    }
 
-    private void addNote(Note note) throws IOException {
+    private void addNote(Note note) {
         h4.setText(h3.getText());
-        img4.setImageDrawable(img3.getDrawable());
+        img4 = img3;
         h3.setText(h2.getText());
-        img3.setImageDrawable(img2.getDrawable());
+        img3 = img2;
         h2.setText(h1.getText());
-        img2.setImageDrawable(img1.getDrawable());
+        img2 = img1;
         h1.setText(note.getText());
-
-        Bitmap bmp = Picasso.with(getContext()).load("http://i.imgur.com/DvpvklR.png").get();
-        img1.setImageBitmap(bmp);
+        Picasso.with(getContext()).load("http://i.imgur.com/DvpvklR.png").into(img1);
 
         final SoundPool mSoundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
         final int mAlertReceived = mSoundPool.load(getContext(), R.raw.countdown_bip, 1);
@@ -137,7 +134,7 @@ public class FeedView extends FrameLayout {
         mSoundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
             @Override
             public void onLoadComplete(SoundPool soundPool, int i, int i2) {
-                mSoundPool.play(mAlertReceived, 1, 1, 1, 0, 1);
+                mSoundPool.play(mAlertReceived, 1, 1, 1, 2, 1);
 //                FeedService.getLiveCard().navigate();
             }
         });
