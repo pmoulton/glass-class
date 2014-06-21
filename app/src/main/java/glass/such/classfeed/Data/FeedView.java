@@ -104,44 +104,27 @@ public class FeedView extends FrameLayout {
             try {
                 JSONObject json = new JSONObject();
                 json.put(Image.DESC, count+ " Placeholder description text");
-                json.put(Image.TITLE, "Placeholder title text");
+                json.put(Image.TITLE, count+ " Placeholder title text");
                 json.put(Image.URL, "url");
                 Image newImage = new Image(json);
-//                mListView.invalidateViews();
-//                mFeedListAdapter.add(newImage);
-//                Log.d("", String.valueOf(mFeedListAdapter.getCount()));
-//                mListView.smoothScrollToPosition(0);
-                mChangeListener.onChange();
                 count++;
-                Log.d(TAG, count + "" + count %4);
-
-                switch (count %4) {
-                    case 0:
-                        Log.d(TAG, "1");
-                        d1.setText(count + " Placeholder text");
-                        h1.setText(count + " Placeholder desc");
-                        break;
-                    case 1:
-                        Log.d(TAG, "2");
-                        d2.setText(count + " Placeholder text");
-                        h2.setText(count + " Placeholder desc");
-                        break;
-                    case 2:
-                        Log.d(TAG, "3");
-                        d3.setText(count + " Placeholder text");
-                        h3.setText(count + " Placeholder desc");
-                        break;
-                    case 3:
-                        Log.d(TAG, "4");
-                        d4.setText(count + " Placeholder text");
-                        h4.setText(count + " Placeholder desc");
-                        break;
-                }
+                addImage(newImage);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
         }
+    }
+
+    private void addImage(Image img) {
+        h4.setText(h3.getText());
+        d4.setText(d3.getText());
+        h3.setText(h2.getText());
+        d3.setText(d2.getText());
+        h2.setText(h1.getText());
+        d2.setText(d1.getText());
+        h1.setText(img.getTitle());
+        d1.setText(img.getDescription());
     }
 
 }
