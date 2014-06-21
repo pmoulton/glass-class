@@ -16,7 +16,7 @@ import com.radiusnetworks.proximity.ibeacon.IBeaconManager;
 
 import java.util.Collection;
 
-public class MainActivity extends Activity implements IBeaconConsumer, RangeNotifier, IBeaconDataNotifier {
+public class MenuActivity extends Activity implements IBeaconConsumer, RangeNotifier, IBeaconDataNotifier {
 
     private static final String TAG = "MainActivity";
     IBeaconManager iBeaconManager;
