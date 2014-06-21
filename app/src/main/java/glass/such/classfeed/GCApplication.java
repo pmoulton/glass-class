@@ -4,7 +4,6 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-import android.widget.TextView;
 
 import com.radiusnetworks.ibeacon.Region;
 import com.radiusnetworks.proximity.ibeacon.startup.BootstrapNotifier;
@@ -46,7 +45,7 @@ public class GCApplication extends Application implements BootstrapNotifier {
     @Override
     public void didEnterRegion(Region arg0) {
         Log.d(TAG, "did enter region.");
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, MenuActivity.class);
         this.startActivity(intent);
     }
 
