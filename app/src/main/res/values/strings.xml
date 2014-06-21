@@ -6,5 +6,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="glass_voice_trigger">Start Class</string>
+    <string name="empty_string">No content available</string>
 
 </resources>

@@ -2,7 +2,9 @@ package glass.such.classfeed;
 
 import android.app.PendingIntent;
 import android.app.Service;
+import android.appwidget.AppWidgetManager;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
@@ -48,6 +50,23 @@ public class LiveCardService extends Service {
             mLiveCard.setAction(PendingIntent.getActivity(
                     this, 0, menuIntent, 0));
 
+            //RemoteViews Service needed to provide adapter for ListView
+            Intent svcIntent = new Intent(this, RemoteListFeedUpdater.class);
+            //passing app widget id to that RemoteViews Service
+            svcIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, 1);
+            //setting a unique Uri to the intent
+            //don't know its purpose to me right now
+            svcIntent.setData(Uri.parse(
+                    svcIntent.toUri(Intent.URI_INTENT_SCHEME)));
+            //setting adapter to listview of the widget
+            mLiveCardView.setRemoteAdapter(R.id.listViewWidget,
+                    svcIntent);
+            //setting an empty view in case of no data
+            mLiveCardView.setEmptyView(R.id.listViewWidget, R.id.empty_view);
+
+            // Always call setViews() to update the live card's RemoteViews.
+            mLiveCard.setViews(mLiveCardView);
+
             // Publish the live card
             mLiveCard.publish(PublishMode.REVEAL);
 
@@ -86,9 +105,6 @@ public class LiveCardService extends Service {
          */
         public void run(){
             if(!isStopped()){
-
-                // Always call setViews() to update the live card's RemoteViews.
-                mLiveCard.setViews(mLiveCardView);
 
                 // Queue another score update in 30 seconds.
                 mHandler.postDelayed(mUpdateLiveCardRunnable, DELAY_MILLIS);
