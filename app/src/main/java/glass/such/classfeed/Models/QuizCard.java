@@ -36,7 +36,15 @@ public class QuizCard {
         return imageUrl;
     }
 
-    public List<Question.Answer> getAnswers() {
+    public List<String> getAnswers() {
+        List<String> returnList = new ArrayList<String>();
+        for(int i=0; i< answers.size(); i++) {
+            returnList.add(answers.get(i).getAnswer());
+        }
+        return returnList;
+    }
+
+    public List<Question.Answer> getAnswersAsAnswers() {
         return answers;
     }
 }
