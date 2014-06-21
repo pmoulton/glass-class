@@ -103,25 +103,25 @@ public class GCApplication extends Application implements BootstrapNotifier {
 
     protected static void handlePayload(JSONObject object){
         try {
-
-
             if(object != null ){
-
                 if(object.length() == 0)
                     return;
-
                 else if(object.has("status") && TextUtils.equals(object.getString("status"), "fail")) {
                     //GCApplication.stopAutoPuller();
+                    Log.d(TAG, "Stopping Auto Puller as Slides are not in session");
                     return;
                 }
             }
             if(onItemReceived != null) {
                 try {
                     String type = object.getString(Constants.JSON.TYPE);
+                    Log.d(TAG, "Type: " + type);
                     //Send a message to the callbacks that something has happened
-                    if (TextUtils.equals(type, Note.NOTE))
+                    if (TextUtils.equals(type, Note.NOTE)) {
+                        Log.d(TAG, "We have a note!");
                         onItemReceived.onNotesReceived(
                                 new Note(object.getJSONObject(Constants.JSON.DATA)));
+                    }
                     else if (TextUtils.equals(type, Quiz.QUIZ))
                         onItemReceived.onQuizReceived(
                                 new Quiz(object.getJSONObject(Constants.JSON.DATA)));

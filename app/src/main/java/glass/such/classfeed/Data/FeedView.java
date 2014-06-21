@@ -103,11 +103,11 @@ public class FeedView extends FrameLayout {
         GCApplication.OnItemReceived onItemReceived = new GCApplication.OnItemReceived() {
             @Override
             public void onQuizReceived(Quiz receivedQuiz) throws Exception {
-
             }
 
             @Override
             public void onNotesReceived(Note receivedNote) throws Exception {
+
                 addNote(receivedNote);
             }
         };
