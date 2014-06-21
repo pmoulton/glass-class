@@ -27,6 +27,10 @@ public class GCApplication extends Application implements BootstrapNotifier {
         Region region = new Region("com.radiusnetworks.androidproximityreference.backgroundRegion",beaconUUID, null, null);
         regionBootstrap = new RegionBootstrap(this, region);
 
+        //Throw OnStart Testing Stuff Here
+        if(Constants.Debug.ENABLED){
+            getWebSocketConnection().startConnection(Constants.Debug.WSURI);
+        }
     }
 
     public static AutoBahnConnection getWebSocketConnection(){

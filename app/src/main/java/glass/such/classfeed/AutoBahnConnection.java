@@ -13,8 +13,6 @@ public class AutoBahnConnection {
     private final String TAG = "AutoBahnConnection";
     private final WebSocketConnection mConnection = new WebSocketConnection();
 
-
-
     public AutoBahnConnection(){
 
     }
