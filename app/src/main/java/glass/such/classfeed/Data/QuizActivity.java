@@ -8,7 +8,13 @@ import android.view.MenuItem;
 import com.google.android.glass.widget.CardScrollAdapter;
 import com.google.android.glass.widget.CardScrollView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import glass.such.classfeed.Models.Quiz;
+import glass.such.classfeed.QuizScrollAdapter;
 import glass.such.classfeed.R;
+import glass.such.classfeed.Util.Constants;
 
 public class QuizActivity extends Activity {
 
@@ -20,7 +26,12 @@ public class QuizActivity extends Activity {
         setContentView(R.layout.activity_quiz);
 
         cardScrollView = (CardScrollView) findViewById(R.id.quizscroller);
-
+        try {
+            QuizScrollAdapter quizScrollAdapter = new QuizScrollAdapter(new Quiz(new JSONObject(Constants.Test.QUIZPAYLOAD)));
+            cardScrollView.setAdapter(quizScrollAdapter);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
