@@ -14,17 +14,9 @@
 
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main">
+            android:label="@string/title_activity_main"
+            android:launchMode="singleInstance">
         </activity>
-
-        <service
-            android:name=".BeaconMonitor"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="glass.such.glassfeed.BeaconMonitor" />
-            </intent-filter>
-        </service>
 
     </application>
 
