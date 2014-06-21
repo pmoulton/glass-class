@@ -4,6 +4,7 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -133,14 +134,17 @@ public class FeedView extends FrameLayout {
 //    }
 
     private void addNote(Note note) {
+        Log.d(TAG, "addnote");
         h4.setText(h3.getText());
-        img4 = img3;
+        img4.setImageDrawable(img3.getDrawable());
         h3.setText(h2.getText());
-        img3 = img2;
+        img3.setImageDrawable(img2.getDrawable());
         h2.setText(h1.getText());
-        img2 = img1;
+        img2.setImageDrawable(img1.getDrawable());
         h1.setText(note.getText());
-        Picasso.with(getContext()).load("http://i.imgur.com/DvpvklR.png").into(img1);
+        for (int i=0; i<note.getImageCount(); i++) {
+            Picasso.with(getContext()).load(note.getImages()[i].getUrl()).into(img1);
+        }
 
         final SoundPool mSoundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
         final int mAlertReceived = mSoundPool.load(getContext(), R.raw.countdown_bip, 1);
@@ -148,7 +152,7 @@ public class FeedView extends FrameLayout {
         mSoundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
             @Override
             public void onLoadComplete(SoundPool soundPool, int i, int i2) {
-                mSoundPool.play(mAlertReceived, 1, 1, 1, 2, 1);
+                mSoundPool.play(mAlertReceived, 1, 1, 1, 0, 1);
 //                FeedService.getLiveCard().navigate();
             }
         });
