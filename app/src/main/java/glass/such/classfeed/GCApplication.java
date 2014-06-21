@@ -11,6 +11,7 @@ import com.radiusnetworks.proximity.ibeacon.startup.RegionBootstrap;
 
 import glass.such.classfeed.Util.AutoBahnConnection;
 import glass.such.classfeed.Util.Constants;
+import glass.such.classfeed.Util.SocketConnection;
 
 /**
  * Created by vincente on 6/20/14.
@@ -21,7 +22,7 @@ public class GCApplication extends Application implements BootstrapNotifier {
     private static final String beaconUUID = "B0702880-A295-A8AB-F734-031A98A512DE";
     private RegionBootstrap regionBootstrap;
     private static Context mContext = null;
-    private static AutoBahnConnection webSocketConnection = null;
+    private static SocketConnection webSocketConnection = null;
 
     @Override
     public void onCreate() {
@@ -32,13 +33,13 @@ public class GCApplication extends Application implements BootstrapNotifier {
 
         //Throw OnStart Testing Stuff Here
         if(Constants.Debug.ENABLED){
-            getWebSocketConnection().startConnection(Constants.Debug.WSURI);
+            getWebSocketConnection().connect(Constants.WSURI);
         }
     }
 
-    public static AutoBahnConnection getWebSocketConnection(){
+    public static SocketConnection getWebSocketConnection(){
         if(webSocketConnection== null)
-            webSocketConnection = new AutoBahnConnection();
+            webSocketConnection = SocketConnection.getInstance();
         return webSocketConnection;
     }
 

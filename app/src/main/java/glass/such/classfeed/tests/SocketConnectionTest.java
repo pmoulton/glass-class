@@ -4,26 +4,24 @@ import android.text.TextUtils;
 
 import junit.framework.TestCase;
 
-import de.tavendo.autobahn.AutobahnConnection;
 import glass.such.classfeed.Models.Image;
 import glass.such.classfeed.Models.Note;
 import glass.such.classfeed.Models.Question;
 import glass.such.classfeed.Models.Quiz;
-import glass.such.classfeed.Util.AutoBahnConnection;
+import glass.such.classfeed.Util.SocketConnection;
 
-public class AutoBahnHeirarchyTest extends TestCase {
+public class SocketConnectionTest extends TestCase {
 
-    AutobahnConnection connection = null;
+    SocketConnection connection = null;
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        connection = new AutobahnConnection();
+        connection = SocketConnection.getInstance();
     }
 
     public void testSetOnItemReceived() throws Exception {
         assert(connection != null);
-
-        AutoBahnConnection.OnItemReceived onItemReceived = new AutoBahnConnection.OnItemReceived() {
+        SocketConnection.OnItemReceived onItemReceived = new SocketConnection.OnItemReceived() {
             @Override
             public void onQuizReceived(Quiz receivedQuiz) throws Exception {
                 testQuiz(receivedQuiz);
